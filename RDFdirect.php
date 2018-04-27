@@ -95,7 +95,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
       include('inc/modelo_datos.php'); 
     }
       ?>   
-      </div>
+      
     </fieldset>
 <?php
     include ("template_path/footer.php");
