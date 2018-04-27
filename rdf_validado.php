@@ -1,8 +1,7 @@
 <?php
 include ('inc/config.php');
 include ('inc/validate_by_uri.php');
-//include ('inc/expresiones_regulares.php');
-//include ('inc/validate_by_uri.php');
+include ("template_path/head.php");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,25 +17,20 @@ include ('inc/validate_by_uri.php');
 
     <title>VALIDADOR|RDF</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="css/rdfval.css" rel="stylesheet">
 
 </head>
 <!-- Header -->
     <header class='rdfval' id="rdfval">
-        <div class="container">
-        <div class="row text-left">
-        <a href="http://www.w3.org/RDF/" title="RDF Resource Description Framework"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.64" alt="RDF Resource Description Framework Icon"/></a><div class="col-lg-10 col-lg-offset-1">
-        <h2><strong>Resultados de Validación</strong></h2>
-        <p>Presentación de errores encontrados</p>
-        </div>
-        </div>
-        </div>
+      <div class= 'row'>
+        <div class="col-sm-2"><a href="index.php" title="Validador RDF"><img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.128"
+alt="RDF Resource Description Framework Icon"/></a></div>
+        <div class="col-sm-5"><h2><strong>Resultados de Validación</strong></h2>
+        <p>Mostrando resultados</p></div>
+        <div class="col-sm-3"><img src="img/lodutpl.png"></div>   
+      </div>
     </header>
-
 <!-- About -->
     <section id="about" class="about">
       <div class="container text-center">
@@ -49,10 +43,10 @@ include ('inc/validate_by_uri.php');
         </table>
       </div> 
     </section>
-    <div class="boton" id="boton">
-    <input type="button" value="Detalle de errores:">
-    </div>  
-    <div class="resultados" id="resultados">
+    <div class="container">
+                    <fieldset class="front">
+                      <legend class="main">Mensajes</legend>
+                      <div class="resultados" id="resultados">
     <?php
     include('inc/validar_uri.php');
       //var_dump($validador->errores);
@@ -60,13 +54,15 @@ include ('inc/validate_by_uri.php');
         echo "<div class='errores'>".$error."</div>";
       }
     ?>   
-    </div>
+     </div>
+    </fieldset><br>
+    <fieldset>
     <h2>Modelo de datos</h2>
-    <div class="tripletas" id="tripletas"><br>
         <?php
       include('inc/modelo_datos.php'); 
       ?>   
-      </div>
+    </fieldset>
+
 <?php
     include ("template_path/footer.php");
 ?> 

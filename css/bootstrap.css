@@ -1800,7 +1800,8 @@ pre code {
     width: 50%;
   }
   .col-sm-5 {
-    width: 41.66666667%;
+    width: 50%;
+    padding-top: 3%;
   }
   .col-sm-4 {
     width: 33.33333333%;
@@ -1809,7 +1810,9 @@ pre code {
     width: 25%;
   }
   .col-sm-2 {
-    width: 16.66666667%;
+    width: 18%;
+    padding-top: 2.5%;
+    padding-left: 3%;
   }
   .col-sm-1 {
     width: 8.33333333%;
@@ -6760,4 +6763,5 @@ button.close {
     display: none !important;
   }
 }
+
 /*# sourceMappingURL=bootstrap.css.map */

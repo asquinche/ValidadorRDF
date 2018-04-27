@@ -10,7 +10,7 @@ include ("template_path/header.php");
                         <p>Pegue un documento RDF / XML en el campo de texto.</p>
                         <form method="post" action="RDFdirect.php">  
                         <div class="form-group">
-                        <textarea id="texto" name="texto" rows="15" cols="75" >
+                        <textarea  class="form-control" id="texto" name="texto" rows="15" cols="75" >
                         </textarea><br>
                             <button class="btn btn-primary" type="submit">Validar</button>
                             <button class="btn btn-default" type="reset">Borrar</button>

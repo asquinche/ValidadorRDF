@@ -23,13 +23,13 @@ include ("template_path/head.php");
 </head>
 <!-- Header -->
     <header class='rdfval' id="rdfval">
-        <div class="container">
-        <div class="row text-left">
-        <a href="http://www.w3.org/RDF/" title="RDF Resource Description Framework"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.64" alt="RDF Resource Description Framework Icon"/></a><div class="col-lg-10 col-lg-offset-1">
-        <h2><strong>Resultados de Validación</strong></h2>
-        <p>Mostrando resultados</p>
-        </div>
-        </div>
+      <div class= 'row'>
+        <div class="col-sm-2"><a href="index.php" title="Validador RDF"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.128"
+alt="RDF Resource Description Framework Icon"/></a></div>
+        <div class="col-sm-5"><h2><strong>Resultados de Validación</strong></h2>
+        <p>Mostrando resultados</p></div>
+        <div class="col-sm-3"><img src="img/lodutpl.png"></div>   
+      </div>
     </header>
 
 <!-- About -->

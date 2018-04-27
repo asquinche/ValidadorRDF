@@ -11,7 +11,7 @@ include ("template_path/header.php");
                         <p>Ingrese un URI de un documento RDF / XML en el campo de texto.</p>
                         <form method="post" action= "rdf_validado.php">
                         <label>Dirección:</label>   
-                          <input class="w3-input w3-border" type="text"  name="url" id="url" size="75">
+                          <input class="" type="text"  name="url" id="url" size="110">
                             <button class="btn btn-primary" type="submit">Validar</button>
                             <button class="btn btn-default" type="reset">Borrar</button>
                         </form>
