@@ -39,7 +39,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
         	<tr ><th colspan="2">DETALLES GENERALES</th></tr>
         	<tr><th>Doctype:</th><td>RDF/XML</td>
         	</tr>
-        	<tr><th>Número de errores:</th><td><?php echo $validador->count_errors+$clase->getSizeErrores();?></td></tr>
+        	<tr><th>Número de errores:</th><td><?php echo $validador->count_errors+$clase->getSizeErrors();?></td></tr>
         </table>
       </div> 
     </section>
@@ -48,7 +48,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
                       <legend class="main">Mensajes</legend>
                       <div class="resultados" id="resultados">
     <?php
-    $num=$validador->count_errors+$clase->getSizeErrores();
+    $num=$validador->count_errors+$clase->getSizeErrors();
     if ($num==0){
     echo"En hora buena. Su archivo no contiene errores.";
   }else{
@@ -65,7 +65,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
     }
 
           /*Recorrer los errores DUPLICIDAD*/
-          $errores=$clase->getErrores();
+          $errores=$clase->getErrors();
 
           foreach ($errores as  $value) {
             if ($value) {
@@ -87,7 +87,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
     <fieldset>
       <legend class="main">Modelo de datos</legend>
         <?php
-        $num=$validador->count_errors+$clase->getSizeErrores();
+        $num=$validador->count_errors+$clase->getSizeErrors();
     if ($num>0){
     echo"Corrija los errores para mostrar el modelo de datos";
   }else{

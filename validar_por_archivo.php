@@ -8,10 +8,11 @@ include ("template_path/header.php");
                     <fieldset class="front">
                         <legend class="main">Verifique por archivo</legend>
                         <p>Ingrese el documento RDF / XML en el campo de texto.</p>
-                        <form action="fileRDF_validado.php" method="POST" enctype="multipart/form-data">
+                        <form action="fileRDF_validado" method="POST" enctype="multipart/form-data">
                         <label>Archivo</label>   
-                          <div>
-                        <input id="archivo" name= "archivo" type="file" class="file" multiple="true" data-preview-file-type="any"></div>
+                        <div>
+                            <input type="file" name="archivo" accept=".rdf" class="file" data-preview-file-type="any" required/>
+                        </div>
                         </form>
                     </fieldset><br><br><br>
                     <div class="container">

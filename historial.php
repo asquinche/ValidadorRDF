@@ -1,6 +1,7 @@
 <?php
 include ('inc/config.php');
 include ("template_path/head.php");
+include("inc/conexion.php"); 
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,47 +24,46 @@ include ("template_path/head.php");
 <!-- Header -->
     <header class='rdfval' id="rdfval">
       <div class= 'row'>
-        <div class="col-sm-2"><a href="index.php" title="Validador RDF"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.128"
+        <div class="col-sm-2"><a href="/" title="Validador RDF"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.128"
 alt="RDF Resource Description Framework Icon"/></a></div>
         <div class="col-sm-5"><h2><strong>HISTORIAL</strong></h2>
         <p>Reporte de uso de la aplicación</p></div>
         <div class="col-sm-3"><img src="img/lodutpl.png"></div>   
       </div>
     </header>
-
     <section id="about" class="about">
       <div class="container text-center">
-        <table border style="margin: 0 auto; width: 75%">
-            <tr ><th colspan="5">DETALLES GENERALES</th></tr>
-    <th>Tipo de validación</th>
+        <?php
+        $sql = "SELECT id, tipo_validacion, nombre_archivo, errores, fecha, hora FROM registro";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+         // output data of each row
+          echo "<table class='table table-bordered'>";
+          echo "<thead>
+          <tr ><th colspan='6'>DETALLES GENERALES</th></tr>
+          <tr>
+          <th>Id</th>
+          <th>Tipo de validación</th>
+          <th>Nombre de archivo</th>
+          <th>Errores</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          </tr>
+          </thead>";
+          while($row = $result->fetch_assoc()) {
+            echo "<tr>
+            <td> $row[id] </td>
+            <td Width=50%> $row[tipo_validacion] </td>
+            <td> $row[nombre_archivo] </td>
+            <td> $row[errores] </td>
+            <td> $row[fecha] </td>
+            <td> $row[hora] </td></tr>";
+          }
+        } else {
+          echo "0 results";
+        }
+          $conn->close(); 
+        ?>
+    </div> 
+  </section>
 
-    <th>Nombre de archivo</th>
-
-    <th>Errores</th>
-
-    <th>Fecha</th>
-
-    <th>Hora</th>
-
-  </tr>
-
-  <tr>
-
-    <td>URI</td>
-
-    <td>Ecuador.rdf</td>
-
-    <td>0 errores</td>
-
-    <td>27/04/2018</td>
-
-    <td>17:22</td>
-
-  </tr>
-
-</table>
-      </div> 
-    </section>
-<?php
-    include ("template_path/footer.php");
-?> 

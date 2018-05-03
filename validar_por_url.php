@@ -9,9 +9,9 @@ include ("template_path/header.php");
                     <fieldset class="front">
                         <legend class="main">Verifique por Uri</legend>
                         <p>Ingrese un URI de un documento RDF / XML en el campo de texto.</p>
-                        <form method="post" action= "rdf_validado.php">
+                        <form method="post" action= "rdf_validado" id="formulario1">
                         <label>Dirección:</label>   
-                          <input class="" type="text"  name="url" id="url" size="110">
+                          <input class="" type="url" pattern="(.+\.rdf)"  name="url" id="url" size="110" required>
                             <button class="btn btn-primary" type="submit">Validar</button>
                             <button class="btn btn-default" type="reset">Borrar</button>
                         </form>

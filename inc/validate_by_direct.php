@@ -18,7 +18,7 @@ include ('conexion.php');
        	//verificar duplicidad de datos 	  
     		$arreglo=explode("\r\n", $txt);
     		$clase = new Duplicidad($arreglo);
-    		$clase->verificar();
+    		$clase->validate();
 
         $verificar= new Etiquetas($txt);
         $verificar->verificar();

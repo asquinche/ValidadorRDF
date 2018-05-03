@@ -9,7 +9,7 @@
                     <ul class="list-unstyled">
                         <li><i class="fa fa-envelope-o fa-fw"></i> <a href="#">asquinche@utpl.edu.ec</a>
                         </li>
-                        <a title="Historial" href="historial.php"><img src="img/RDFH.png" height="30"></a>
+                        <a title="Historial" href="historial"><img src="img/RDFH.png" height="30"></a>
                     </ul>
                     <p class="text-muted">Copyright &copy; VALIDADOR|RDF 2018</p>
                 </div>

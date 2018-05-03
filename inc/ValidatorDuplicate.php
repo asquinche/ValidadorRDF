@@ -1,7 +1,7 @@
 <?php 
-header('Content-Type: text/html; charset=utf-8');
-class Duplicidad{
-	private  $errors=array();
+	class ValidatorDuplicate{
+
+		private  $errors=array();
 		private  $input_txt=array();
 		private  $sizeErrors=0;
 
@@ -68,4 +68,4 @@ class Duplicidad{
 			return $this->sizeErrors;
 		}
 	}
-?>
+ ?>
