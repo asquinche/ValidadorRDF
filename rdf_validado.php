@@ -48,21 +48,56 @@ alt="RDF Resource Description Framework Icon"/></a></div>
                       <legend class="main">Mensajes</legend>
                       <div class="resultados" id="resultados">
     <?php
-    include('inc/validar_uri.php');
-      //var_dump($validador->errores);
-      foreach ($validador->errores as $error){
-        echo "<div class='errores'>".$error."</div>";
-      }
-    ?>   
-     </div>
+    $num=$validador->count_errors+$clase->getSizeErrors();
+    if ($num==0){
+    echo"Su archivo no contiene errores.";
+  }else{
+    
+
+    if ($validador->count_errors>0) {
+      # code...
+          foreach ($validador->errores as $error){
+            if ($error) {
+              echo "<strong>Revise sintaxis:</strong>";
+              echo "<div class='errores'>".$error."</div>";
+            } 
+          } 
+    }
+
+          /*Recorrer los errores DUPLICIDAD*/
+          $errores=$clase->getErrors();
+
+          foreach ($errores as  $value) {
+            if ($value) {
+              echo "<strong>Revise datos duplicados:</strong>";
+              echo  "<div class='errores'>".htmlspecialchars($value)."</div>";
+            }
+          }
+
+          //Errores de etiquetas
+          foreach(libxml_get_errors() as $error) {
+            echo "<strong>Revise etiquetas:</strong>";
+          echo "<div class='errores'>".$error->message."</div>";
+        }
+  }
+      
+    ?> 
+    </div>
     </fieldset><br>
     <fieldset>
-    <h2>Modelo de datos</h2>
+      <legend class="main">Modelo de datos</legend>
         <?php
-      include('inc/modelo_datos.php'); 
-      ?>   
-    </fieldset>
+        $num=$validador->count_errors+$clase->getSizeErrors();
+    if ($num>0){
+    echo"Corrija los errores para mostrar el modelo de datos";
+  }else{
 
+      include('inc/modelo_datos.php'); 
+    }
+      ?>   
+      
+    </fieldset>
 <?php
     include ("template_path/footer.php");
 ?> 
+

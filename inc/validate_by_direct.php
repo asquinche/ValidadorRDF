@@ -7,19 +7,17 @@ include ('conexion.php');
 
         $txt = $_POST['texto'];
         $lineas = explode("\n",$txt);
-
        	$validador= new Automata();
        	$validador->validar($lineas);
-
         $strinError=implode(",", $validador->errores);
 
-        
-
-       	//verificar duplicidad de datos 	  
+       	
+        //verificar duplicidad de datos 	  
     		$arreglo=explode("\r\n", $txt);
     		$clase = new Duplicidad($arreglo);
     		$clase->validate();
 
+        //verificar etiquetas
         $verificar= new Etiquetas($txt);
         $verificar->verificar();
 

@@ -1,23 +1,37 @@
 <?php 
+include ('subir_archivo.php');
 include('automata.php');
-if ($_FILES['archivo']["error"] >0)
-{
-	echo "Error: " . $_FILES['archivo']['error'] ."<br>";/* AGREGAR UN MENSAJE SOBRE NINGÚN ARCHIVO CARGADO*/
-}
-else
-{
-	//echo "Archivo subido con éxito ";
-}	
+include ('duplicidad.php');
+include ('etiquetas.php');
+include ('conexion.php');
 
-/*guardar los archivos en el servidor*/
-	move_uploaded_file($_FILES['archivo']['tmp_name'],
-	 'upload/'. $_FILES['archivo']['name']);
 
-	$dir_subida = 'C:/xampp/htdocs/validadorRDF/upload/';
-	$fichero_subido = $dir_subida . basename($_FILES['archivo']['name']);
 	$lineas = file($fichero_subido);
 	$validador=new Automata();
     $validador->validar($lineas);
+    $strinError=implode(",", $validador->errores);
 
+    //verificar duplicidad de datos 	  
+    $archivo_s=file_get_contents($fichero_subido);
+    $arreglo=explode("\r\n", $archivo_s);
+    $clase = new Duplicidad($arreglo);
+    $clase->validate();
+
+    
+    $archivo_s=file_get_contents($fichero_subido);
+    $verificar= new Etiquetas($archivo_s);
+    $verificar->verificar();
+
+    $tipo =("validar por archivo"); 
+    $nombre_archivo = $_FILES['archivo']['name'];      
+    $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
+    VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
+
+    if ($conn->query($sql) === TRUE) {
+    //echo "New record created successfully";
+    } else {
+    	echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+    $conn->close();
 ?>
 

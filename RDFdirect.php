@@ -50,7 +50,7 @@ alt="RDF Resource Description Framework Icon"/></a></div>
     <?php
     $num=$validador->count_errors+$clase->getSizeErrors();
     if ($num==0){
-    echo"En hora buena. Su archivo no contiene errores.";
+    echo"Su archivo no contiene errores.";
   }else{
     
 
