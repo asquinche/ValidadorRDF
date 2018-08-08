@@ -25,14 +25,11 @@ class ValidatorRules {
 
 	public static function r5($cadena){
 		$cadena=trim($cadena);
-		return preg_match('/^<([a-z:a-zA-Z]+(\s)[a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\_\,\&\-\xe2\x80\x93\(\)\#\/\?\=\;]*\")+(\s)*>$/', $cadena);
+		return preg_match('/^<([a-z:a-zA-Z]+(\s)[a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\%\_\,\&\-\xe2\x80\x93\(\)\#\/\?\=\;\ã]*\")+(\s)*>$/', $cadena);
 	}
-
-
-	//<rdfs:comment xml:lang="es">Una fuente de energía primaria es toda forma de energía disponible en la naturaleza antes de ser convertida o transformada. Consiste en la energía contenida en los combustibles crudos, la energía solar, la eólica, la geotérmica y otras formas de energía que constituyen una entrada al sistema. Si no es utilizable directamente, debe ser transformada en una fuente de energía secundaria .</rdfs:comment>
 	public static function r6($cadena){
 		$cadena=trim($cadena);
-		return preg_match('/^<[a-z:a-zA-Z]+((\s)[a-z]+\:[a-z]+\=\"[a-z]+\")*>.+<\/[a-z:a-z]+(\s)*>/', $cadena);
+		return preg_match('/^<([a-z:a-zA-Z(\_\-)*])+((\s)[a-z]+\:[a-z]+\=\"[a-z]+\")*>.+<\/[a-z:a-zA-Z(\_\-)*]+(\s)*>/', $cadena);
 	}
 
 
@@ -41,24 +38,21 @@ class ValidatorRules {
 		return preg_match('/^<[a-z:a-zA-Z]+>/', $cadena);
 	}
 
-	//<prov:wasDerivedFrom rdf:resource="http://es.wikipedia.org/wiki/Energía_primaria?oldid=76356510"/>
 	public static function r8($cadena){
 		$cadena=trim($cadena);
-		return preg_match('/^<([a-z:a-zA-Z]+(\s)[a-z:a-zA-Z]+\\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\_\,\;\-\xe2\x80\x93\(\)\&\#\/\?\=\:\/]*\"(\s)*)+\/>$/', $cadena);
+		return preg_match('/^<([a-z:(0-9)*a-zA-Z(_)*]+(\s)[a-z:a-zA-Z]+\\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\%\&\:\_\,\-\#\/\?\=\(\)\xe2\x80\x93\ä\로\하\_\에\콰\도\르\ö\ã)]*\"(\s))+\/>$/', $cadena);
 	}
 
-	//<prop-latam:wikiPageUsesTemplate rdf:resource="http://es-la.dbpedia.org/resource/Plantilla:Listaref"/>
 	public static function r9($cadena){
 		$cadena=trim($cadena);
-		return preg_match('/^<[a-z]+\-[a-z]+\:[a-zA-Z]+(\s)([a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\_\,\;\-\xe2\x80\x93\(\)\&\#\/\?\=\:\/]*\"(\s)*)+(\s)*\/>$/', $cadena);
+		return preg_match('/^<[a-z]+\-[a-z]+\:[a-zA-Z]+(\s)([a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\_\,\;\-\xe2\x80\x93\(\)\&\ä\#\/\?\=\:\/]*\"(\s)*)+(\s)*\/>$/', $cadena);
 	}
 
 	public static function r10($cadena){
 		$cadena=trim($cadena);
-		return preg_match('/^<[a-z]+\-[a-z]+\:[a-zA-Z]+(\s)([a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\_\,\;\-\xe2\x80\x93\#\(\)\&\/\?\=\:\/]*\")+>.+<\/[a-z]+\-[a-z]+\:[a-zA-Z]+(\s)*>$/', $cadena);
+		return preg_match('/^<([a-z(0-9)*:a-zA-Z]+(\s)[a-z:a-z]+\=\"http:\/\/[0-9a-zA-ZñÑáéíóúÁÉÍÓÚ\.\%\&\:\_\,\-\#\/\?\=\(\)\xe2\x80\x93]*\")+>.+[a-z(0-9)*:a-zA-Z]+(\s)*>$/', $cadena);
 	}
 	
-
 	public static function r11($cadena){
 		$cadena=trim($cadena);
 		return preg_match('/^<\/[a-z:a-zA-Z]+>/', $cadena);//Valida etiqueteas que cierran
@@ -77,6 +71,26 @@ class ValidatorRules {
 	public static function r14($cadena){
 		$cadena=trim($cadena);
 		return preg_match('/^<rdf:RDF(\s)xmlns:[a-z0-9]+\\=\"http:\\/\\/[a-z0-9\.\-\#\/]+\"$/', $cadena);//rdf sin salto de linea completa
+	}
+
+	public static function r15($cadena){
+		$cadena=trim($cadena);
+		return preg_match('/^<\!\-\-((.*)\n*)+\-\->$/', $cadena);
+	}
+
+	public static function r16($cadena){
+		$cadena=trim($cadena);
+		return preg_match('/^<\!\-\-$/', $cadena);//COMENTARIOS
+	}
+
+	public static function r17($cadena){
+		$cadena=trim($cadena);
+		return preg_match('/^.+/', $cadena);//COMENTARIOS
+	}
+
+	public static function r18($cadena){
+		$cadena=trim($cadena);
+		return preg_match('/^\-\->$/', $cadena);//COMENTARIOS
 	}
 
 }

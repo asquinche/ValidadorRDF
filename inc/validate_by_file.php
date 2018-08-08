@@ -1,29 +1,28 @@
 <?php 
 include ('subir_archivo.php');
-include('automata.php');
+include('sintaxis.php');
 include ('duplicidad.php');
 include ('etiquetas.php');
 include ('conexion.php');
 
-
 	$lineas = file($fichero_subido);
-	$validador=new Automata();
-    $validador->validar($lineas);
-    $strinError=implode(",", $validador->errores);
+    //validar sintaxis
+    $val_sintaxis= new Sintaxis($lineas);
+    $val_sintaxis->validate();
+    $strinError=implode(",", $val_sintaxis->getErrors());
 
-    //verificar duplicidad de datos 	  
-    $archivo_s=file_get_contents($fichero_subido);
-    $arreglo=explode("\r\n", $archivo_s);
-    $clase = new Duplicidad($arreglo);
-    $clase->validate();
+    //verificar duplicidad de datos       
+    $val_duplicidad = new Duplicidad($lineas);
+    $val_duplicidad->validate();
+    $strinError=$strinError.implode(",", $val_duplicidad->getErrors());
 
-    
-    $archivo_s=file_get_contents($fichero_subido);
-    $verificar= new Etiquetas($archivo_s);
-    $verificar->verificar();
+    //verificar etiquetas
+    $txt=implode("", $lineas);
+    $val_etiquetas= new Etiquetas($txt);
+    $val_etiquetas->validate();
 
     $tipo =("validar por archivo"); 
-    $nombre_archivo = $_FILES['archivo']['name'];      
+    $nombre_archivo = $name;      
     $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
     VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
 

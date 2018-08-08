@@ -15,7 +15,6 @@
     <link href="css/stylish-portfolio.css" rel="stylesheet">
     <link href="css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/fileinput.min.js" type="text/javascript"></script>
-    <script src="js/fileinput.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css"></script>
 </head>

@@ -2,16 +2,16 @@
 define("RDFAPI_INCLUDE_DIR", "C:/xampp/htdocs/validadorRDF/api/");
 include(RDFAPI_INCLUDE_DIR . "RDFAPI.php");
 
-$archivo = $lineas;
+$modelo = $lineas;
 $contenido = "";
-foreach($archivo as $linea){
-  $contenido .= $linea."\n";
+foreach($modelo as $linea){
+  $contenido .= $linea."";
 }
-if ($validador->count_errors==0) {
-file_put_contents("upload/archivo.rdf", $contenido);
+if ($val_sintaxis->getSizeErrors()==0) {
+file_put_contents("upload/modelo.rdf", $contenido);
 
 // Filename of an RDF document
-$base="upload/archivo.rdf";
+$base="upload/modelo.rdf";
 
 // Create a new MemModel
 $model = ModelFactory::getDefaultModel();
@@ -22,6 +22,5 @@ $model->load($base);
 // Output model as HTML table
 
 	$model->writeAsHtmlTable();
-	# code...
 }
 ?>

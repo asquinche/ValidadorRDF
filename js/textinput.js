@@ -20,9 +20,9 @@
         '<div class="input-group {class}">\n' +
         '   {caption}\n' +
         '   <div class="input-group-btn">\n' +
-        '       {browse}\n' +
-        '       {upload}\n' +
         '       {remove}\n' +
+        '       {upload}\n' +
+        '       {browse}\n' +
         '   </div>\n' +
         '</div>';
 
@@ -129,7 +129,7 @@
     FileInput.prototype = {
         constructor: FileInput,
         listen: function () {
-            var self = this;
+            var self = this
             self.$element.on('change', $.proxy(self.change, self));
             $(self.$element[0].form).on('reset', $.proxy(self.reset, self));
             self.$container.find('.fileinput-remove').on('click', $.proxy(self.clear, self));
@@ -339,16 +339,16 @@
         captionTemplate: CAPTION_TEMPLATE,
         browseLabel: 'Buscar &hellip;',
         browseIcon: '<i class="glyphicon glyphicon-folder-open"></i> &nbsp;',
-        browseClass: 'btn btn-default',
+        browseClass: 'btn btn-primary',
         removeLabel: 'Eliminar',
         removeIcon: '<i class="glyphicon glyphicon-ban-circle"></i> ',
         removeClass: 'btn btn-default',
-        uploadLabel: 'Validar',
-        uploadIcon: '<i class=""></i> ',
-        uploadClass: 'btn btn-primary',
+        uploadLabel: 'Subir',
+        uploadIcon: '<i class="glyphicon glyphicon-upload"></i> ',
+        uploadClass: 'btn btn-default',
         uploadUrl: null,
-        msgLoading: 'Cargando &hellip;',
-        msgProgress: 'Cargado {porcentaje}% of {file}',
+        msgLoading: 'Loading &hellip;',
+        msgProgress: 'Loaded {percent}% of {file}',
         msgSelected: '{n} files selected',
         previewFileType: 'image',
         wrapTextLength: 250,

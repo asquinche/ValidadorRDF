@@ -7,7 +7,7 @@ include ("template_path/header.php");
         <div class="container">
                     <fieldset class="front">
                         <legend class="main">Verifique por entrada directa</legend>
-                        <p>Pegue un documento RDF / XML en el campo de texto.</p>
+                        <p>Pegue un documento RDF / XML en el campo de texto.<em> No valida por fragmentos, sino documento completo</em></p>
                         <form method="post" action="RDFdirect">  
                             <div class="form-group">
                                 <textarea  class="form-control" id="texto" name="texto" rows="15" cols="75" required></textarea><br>

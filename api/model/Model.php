@@ -1,5 +1,7 @@
 <?php
 require_once RDFAPI_INCLUDE_DIR . 'util/Object.php';
+require_once RDFAPI_INCLUDE_DIR . 'util/RDFUtil.php';
+
 
 // ----------------------------------------------------------------------------------
 // Class: Model

@@ -1,102 +1,108 @@
 <?php
+header('Content-Type: text/html; charset=utf-8');
 include ('inc/config.php');
 include('inc/validate_by_direct.php');
 include ("template_path/head.php");
+include ("template_path/header.php");
 ?>
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="img/rdf.png">
-
-    <title>VALIDADOR|RDF</title>
-
-    <!-- Custom CSS -->
-    <link href="css/rdfval.css" rel="stylesheet">
-
-</head>
-<!-- Header -->
-    <header class='rdfval' id="rdfval">
-      <div class= 'row'>
-        <div class="col-sm-2"><a href="index.php" title="Validador RDF"> <img border="0" src="http://www.w3.org/RDF/icons/rdf_w3c_icon.128"
-alt="RDF Resource Description Framework Icon"/></a></div>
-        <div class="col-sm-5"><h2><strong>Resultados de Validación</strong></h2>
-        <p>Mostrando resultados</p></div>
-        <div class="col-sm-3"><img src="img/lodutpl.png"></div>   
-      </div>
-    </header>
-
 <!-- About -->
-    <section id="about" class="about">
-      <div class="container text-center">
-        <table border style="margin: 0 auto; width: 75%">
-        	<tr ><th colspan="2">DETALLES GENERALES</th></tr>
-        	<tr><th>Doctype:</th><td>RDF/XML</td>
-        	</tr>
-        	<tr><th>Número de errores:</th><td><?php echo $validador->count_errors+$clase->getSizeErrors();?></td></tr>
-        </table>
-      </div> 
-    </section>
-        <div class="container">
-                    <fieldset class="front">
-                      <legend class="main">Mensajes</legend>
-                      <div class="resultados" id="resultados">
-    <?php
-    $num=$validador->count_errors+$clase->getSizeErrors();
-    if ($num==0){
-    echo"Su archivo no contiene errores.";
-  }else{
-    
-
-    if ($validador->count_errors>0) {
-      # code...
-          foreach ($validador->errores as $error){
-            if ($error) {
-              echo "<strong>Revise sintaxis:</strong>";
-              echo "<div class='errores'>".$error."</div>";
-            } 
+<body>
+<section id="about" class="about">
+  <div class="container text-center">
+    <table border style="margin: 0 auto; width: 60%" class="table table-bordered">
+      <tr ><th colspan="2">DETALLES GENERALES</th></tr>
+      <tr><th>Doctype:</th><td>RDF/XML</td></tr>
+      <tr><th>Número de errores:</th>
+        <td>
+          <?php 
+          $num = $val_sintaxis->getSizeErrors() + $val_duplicidad->getSizeErrors()+$val_etiquetas->getSizeErrors();
+          echo $num;
+          ?>
+        </td>
+      </tr>
+    </table>
+  </div> 
+</section>
+<div class="container">
+  <fieldset class="front">
+    <legend class="main">Mensajes</legend>
+    <div class="resultados" id="resultados">
+      <?php
+      if ($num==0){
+        echo"Su archivo no contiene errores.";
+      }else{
+        /*Recorrer los errores Sintaxis*/
+        $errores=$val_sintaxis->getErrors();
+        foreach ($errores as $error){
+          if ($error) {
+            echo "<font color='red'><strong>ERROR:</strong></font>";
+            echo "<div class='errores'>".$error."</div>";
           } 
-    }
-
-          /*Recorrer los errores DUPLICIDAD*/
-          $errores=$clase->getErrors();
-
-          foreach ($errores as  $value) {
-            if ($value) {
-              echo "<strong>Revise datos duplicados:</strong>";
-              echo  "<div class='errores'>".htmlspecialchars($value)."</div>";
-            }
+        } 
+        /*Recorrer los errores Duplicidad*/
+        $errores=$val_duplicidad->getErrors();
+        foreach ($errores as  $error) {
+          if ($error) {
+            echo "<font color='blue'><strong>DUPLICADOS:</strong></font>";
+            echo  "<div class='errores'>".$error."</div>";
           }
-
-          //Errores de etiquetas
-          foreach(libxml_get_errors() as $error) {
-            echo "<strong>Revise etiquetas:</strong>";
-          echo "<div class='errores'>".$error->message."</div>";
         }
-  }
-      
-    ?> 
-    </div>
-    </fieldset><br>
-    <fieldset>
-      <legend class="main">Modelo de datos</legend>
-        <?php
-        $num=$validador->count_errors+$clase->getSizeErrors();
-    if ($num>0){
-    echo"Corrija los errores para mostrar el modelo de datos";
-  }else{
 
-      include('inc/modelo_datos.php'); 
+        /*Recorrer los errores Etiquetas*/
+        $errores=$val_etiquetas->getErrors();
+        foreach ($errores as  $error) {
+          if ($error) {
+            echo "<font color='green'><strong>WARNING:</strong></font>";
+            echo  "<div class='errores'>".$error."</div>";
+          }
+        }
+
+        /*Recorrer los errores Etiquetas
+        foreach(libxml_get_errors() as $error) {
+          echo "<font color='green'><strong>REVISAR:</strong></font>";
+          echo "<div class='errores'>".$error->message."</div>";
+        }*/
+      }
+      ?> 
+    </div>
+  </fieldset><br>
+  <fieldset>
+    <legend class="main">Modelo de datos</legend>
+    <?php
+    if ($num>0){
+      echo"Corrija los errores para mostrar el modelo de datos";
+    }else{
+      include('inc/modelo_datos.php');
+      echo "<br>";
+        echo "<table border style='margin: 0 auto; width: 20%' class='table table-bordered'>
+        <tr><th>Simbología de colores</th></tr>
+        <tr>
+          <td bgcolor='#FFFFCC'>Recurso</td>
+        </tr>
+        <tr>
+          <td bgcolor='#CCFFCC'>Propiedad</td>
+        </tr>
+        <tr>
+          <td bgcolor='#E7E7EF'>Literal</td>
+        </tr>
+      </table>";
     }
-      ?>   
-      
-    </fieldset>
+    ?>
+  </fieldset> 
+</div>
 <?php
     include ("template_path/footer.php");
-?> 
+?>
+</body>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('#modelo').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'csv', 'excel', 'pdf','pageLength' 
+        ],
+        "paging":   true
+    } );
+} );
+</script>
+</html>

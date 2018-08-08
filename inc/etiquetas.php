@@ -2,36 +2,33 @@
 header('Content-Type: text/html; charset=utf-8');
 class Etiquetas{
 
-private  $error_tag=array("");
-private  $txt=array("");
-private  $size_error_tag=0;
+	private  $errors=array("");
+	private  $input_txt="";
+	private  $sizeErrors=0;
 
-public function __construct($txt){ 
-		$this->txt=$txt;
+	public function __construct($txt){ 
+		$this->input_txt=$txt;
 	}
 
-function verificar() {
-	libxml_use_internal_errors(true);
-$sxe = simplexml_load_string($this->txt);
-if ($sxe === false) {
-	foreach(libxml_get_errors() as $error) {
-	array_push($this->error_tag, $error->message);
-				$this->size_error_tag++;
-
-    
-        //echo "\t", $error->message;
-    }
-    }
-}
-public function getErrores(){
-		return $this->error_tag;
+	function validate() {
+		libxml_use_internal_errors(true);
+		$sxe = simplexml_load_string($this->input_txt);
+		if ($sxe === false) {
+			foreach(libxml_get_errors() as $error) {
+				array_push($this->errors, $error->message);
+				$this->sizeErrors++;
+	    	}
+	    }
 	}
 
-	public function getSizeErrores(){
-		return $this->size_error_tag;
+
+	public function getErrors(){
+		return $this->errors;
 	}
 
-	
+	public function getSizeErrors(){
+		return $this->sizeErrors;
+	}	
 }
 
 ?> 

@@ -174,14 +174,11 @@ class RDFUtil extends Object {
 		$nms = $model->getParsedNamespaces();
 		$names = '';
 		$pre = '';
-
-
-		echo '<table border="1" cellpadding="3" cellspacing="0" width="100%">' . LINEFEED;
-		echo INDENTATION . '<tr bgcolor="' . HTML_TABLE_HEADER_COLOR . '">' . LINEFEED . INDENTATION . INDENTATION . '<td td width="68%" colspan="3">';
+		echo '<table id="cabecera" class="table table-bordered">' . LINEFEED;
+		echo INDENTATION . '<tr bgcolor="' . HTML_TABLE_HEADER_COLOR . '">' . LINEFEED . INDENTATION . INDENTATION . '<td td width="32%" colspan="1">';
 		echo '<p><b>Base URI:</b> ' . $model->getBaseURI() . '</p></td>' . LINEFEED;
-		echo INDENTATION . INDENTATION . '<td width="32%"><p><b>Size:</b> ' . $model->size() . '</p></td>' . LINEFEED . INDENTATION . '</tr>';
-
-		echo '<tr><td><b>Prefix:</b>'.'<br/></td><td colspan="3"><b>Namespace:</b>'.'<br/></td></tr>';
+		echo INDENTATION . INDENTATION . '<td width="68%"><p><b>Size:</b> ' . $model->size() .' triples'. '</p></td>' . LINEFEED . INDENTATION . '</tr>';
+		echo '<tr><td><b>Prefix:</b>'.'<br/></td><td colspan="3"><b>Namespace:</b>'.'<br/></td></tr>';     
 		$i=0;
 		if($nms != false){
 			foreach($nms as $namespace => $prefix){
@@ -197,12 +194,17 @@ class RDFUtil extends Object {
 		}else{
 			echo '<tr><td>-</td><td colspan="3">-</td></tr>';
 		}
-
-
-
-
-		echo INDENTATION . '<tr bgcolor="' . HTML_TABLE_HEADER_COLOR . '">' . LINEFEED . INDENTATION . INDENTATION . '<td width="4%"><p align=center><b>No.</b></p></td>' . LINEFEED . INDENTATION . INDENTATION . '<td width="32%"><p><b>Subject</b></p></td>' . LINEFEED . INDENTATION . INDENTATION . '<td width="32%"><p><b>Predicate</b></p></td>' . LINEFEED . INDENTATION . INDENTATION . '<td width="32%"><p><b>Object</b></p></td>' . LINEFEED . INDENTATION . '</tr>' . LINEFEED;
-
+		echo "</br>";
+		echo '</table>' . LINEFEED;
+		echo "<table  id='modelo' class='table table-bordered' style='width:100%'>" . LINEFEED;
+		echo '<thead>
+          <tr bgcolor="' . HTML_TABLE_HEADER_COLOR . '">
+          <th>No.</th>
+          <th>Subject</th>
+          <th>Predicado</th>
+          <th>Objet</th>
+          </tr>
+          </thead>';
 		$i = 1;
 		foreach($model->triples as $key => $statement) {
 			$infered='';

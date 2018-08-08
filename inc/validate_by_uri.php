@@ -1,34 +1,44 @@
 <?php
-include('automata.php');
+include('sintaxis.php');
 include('duplicidad.php');
 include('etiquetas.php');
 include ('conexion.php');
 
       $url = $_POST['url'];
-      $lineas = file($url);
-      $count_errors=0;
-      $validador=new Automata();
-      $validador->validar($lineas);
-      $strinError=implode(",", $validador->errores);
+      $a = @get_headers($url);
+      if (is_array($a)) {
+        $lineas = file($url);
 
-      //verificar duplicidad de datos 	  
-      $arreglo=explode("\r\n", $url);
-      $clase = new Duplicidad($arreglo);
-      $clase->validate();
+        //validar sintaxis
+        $val_sintaxis= new Sintaxis($lineas);
+        $val_sintaxis->validate();
+        $strinError=implode(",", $val_sintaxis->getErrors());
 
-      //verificar etiquetas
-      $verificar= new Etiquetas($url);
-      $verificar->verificar();
+        //verificar duplicidad de datos     
+        $val_duplicidad = new Duplicidad($lineas);
+        $val_duplicidad->validate();
+        $strinError=$strinError.implode(",", $val_duplicidad->getErrors());
 
-      $tipo =("validar por URI"); 
-      $nombre_archivo =$url = $_POST['url'];      
-      $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
-      VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
+        //verificar etiquetas
+        $txt=implode("", $lineas);
+        $val_etiquetas= new Etiquetas($txt);
+        $val_etiquetas->validate();
 
-      if ($conn->query($sql) === TRUE) {
-      //echo "New record created successfully";
-      } else {
-         echo "Error: " . $sql . "<br>" . $conn->error;
-       }
+        $tipo =("validar por URI"); 
+        $nombre_archivo =$url = $_POST['url'];
+        if (empty($strinError)) {
+          $strinError='No se encontró errores';
+        }
+        $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
+        VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
+          if ($conn->query($sql) === TRUE) {
+          //echo "New record created successfully";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+       
        $conn->close();
+     } else {
+        include('sin_conexion.php');
+    }
     ?> 

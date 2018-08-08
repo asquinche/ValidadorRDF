@@ -1,17 +1,18 @@
 <?php
 if ($_FILES['archivo']["error"] >0)
 {
-	echo "Error: " . $_FILES['archivo']['error'] ."<br>";/* AGREGAR UN MENSAJE SOBRE NINGÚN ARCHIVO CARGADO*/
+	echo "No se puede subir el archivo"."Error: " . $_FILES['archivo']['error'] ."<br>";
 }
-else
-{
-	//echo "Archivo subido con éxito ";
-}	
 
-/*guardar los archivos en el servidor*/
-	move_uploaded_file($_FILES['archivo']['tmp_name'],
-	 'upload/'. $_FILES['archivo']['name']);
+$total_rdfs = count(glob('upload/{*'.$_FILES['archivo']['name'].'}',GLOB_BRACE));
+if($total_rdfs>0){
+	$name = $total_rdfs.'_'.$_FILES['archivo']['name'];
+}else{
+	$name = $_FILES['archivo']['name'];
+}
 
-	$dir_subida = 'C:/xampp/htdocs/validadorRDF/upload/';
-	$fichero_subido = $dir_subida . basename($_FILES['archivo']['name']);
+
+move_uploaded_file($_FILES['archivo']['tmp_name'],'upload/'. $name);
+$dir_subida = 'C:/xampp/htdocs/validadorRDF/upload/';
+$fichero_subido = $dir_subida . $name;
 ?>

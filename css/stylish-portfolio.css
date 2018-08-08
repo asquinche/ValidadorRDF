@@ -22,7 +22,39 @@ body {
     padding: 40px ;
 }
 
+.rdfval {
+    padding: 0px 0;
+    background-color:#337ab7;
+    color: #FFF;
+}
+.resultados{
+    background-color: #F2F3F4;
+    border-radius: 10px 10px 10px 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: justify;
+    padding-top: 20px;
+    padding-bottom: 10px;
 
+}
+.errores{
+    border:1px solid rgb(189, 195, 199); 
+    background-color: #FFF; 
+    padding: 10px; 
+    margin: 10px;
+
+}
+
+fieldset{
+    background:#F2F3F4;
+
+}
+table, td {
+    text-align: justify;
+}
+table, th {
+    text-align: center;
+}
 
 
 footer {    

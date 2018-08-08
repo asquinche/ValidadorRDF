@@ -139,7 +139,8 @@
             self.$element.trigger('click');
             e.preventDefault();
         },
-        clear: function (e) {
+        clear: function (e) { //función del botón eliminar en input file 
+            location.reload();
             var self = this;
             if (e) {
                 e.preventDefault();
@@ -275,6 +276,7 @@
             if (self.isDisabled) {
                 status = ' disabled ';
             }
+            
             return '<button type="button" class="' + css + '"' + status + '>' + self.removeIcon + self.removeLabel + '</button>';
         },
         renderUpload: function () {
