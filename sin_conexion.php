@@ -3,10 +3,9 @@ include ("inc/config.php");
 include ("template_path/head.php");
 ?>
 <body>
-
-    <?php
-    include ("template_path/header.php");
-  ?>
+<?php
+include ("template_path/header.php");
+?>
   <!-- About -->
     <section id="about" class="about">
         <div class="container">

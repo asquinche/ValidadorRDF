@@ -11,7 +11,7 @@ include ("template_path/header.php");
 <section id="about" class="about">
   <div class="container text-center">
     <table border style="margin: 0 auto; width: 60%" class="table table-bordered">
-      <tr><th colspan="2">DETALLES GENERALES</th></tr>
+      <tr bgcolor="#FCD824"><th colspan="2">DETALLES GENERALES</th></tr>
       <tr><th>Archivo:</th><td><?php echo $name ?></td></tr>
       <tr><th>Doctype:</th><td>RDF/XML</td></tr>
       <tr><th>Número de errores:</th>

@@ -9,12 +9,12 @@ include ('conexion.php');
     //validar sintaxis
     $val_sintaxis= new Sintaxis($lineas);
     $val_sintaxis->validate();
-    $strinError=implode(",", $val_sintaxis->getErrors());
+    $strinError=implode($val_sintaxis->getErrors());
 
     //verificar duplicidad de datos       
     $val_duplicidad = new Duplicidad($lineas);
     $val_duplicidad->validate();
-    $strinError=$strinError.implode(",", $val_duplicidad->getErrors());
+    $strinError=$strinError.implode(, $val_duplicidad->getErrors());
 
     //verificar etiquetas
     $txt=implode("", $lineas);
@@ -23,14 +23,17 @@ include ('conexion.php');
 
     $tipo =("validar por archivo"); 
     $nombre_archivo = $name;      
-    $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
-    VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
-
-    if ($conn->query($sql) === TRUE) {
-    //echo "New record created successfully";
-    } else {
-    	echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-    $conn->close();
+    if (empty($strinError)) {
+          $strinError='No se encontró errores';
+        }
+        $sql = "INSERT INTO registro (tipo_validacion, nombre_archivo, errores, fecha, hora)
+        VALUES ('$tipo', '$nombre_archivo','$strinError',NOW(),NOW())";
+          if ($conn->query($sql) === TRUE) {
+          //echo "New record created successfully";
+          } else {
+          echo "Error: " . $sql . "<br>" . $conn->error;
+          }
+       
+       $conn->close();
 ?>
 

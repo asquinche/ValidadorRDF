@@ -33,7 +33,7 @@ include("inc/conexion.php");
             echo "<td> $row[id] </td>";
             echo "<td> $row[tipo_validacion] </td>";
             echo "<td> $row[nombre_archivo] </td>";
-            echo "<td> $row[errores] </td>";
+            echo "<td><div style='overflow:auto'>$row[errores]</div></td>";
             echo "<td> $row[fecha] </td>";
             echo "<td> $row[hora] </td>";
             echo "</tr>";
