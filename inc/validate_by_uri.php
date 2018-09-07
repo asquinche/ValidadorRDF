@@ -8,7 +8,6 @@ include ('conexion.php');
       $a = @get_headers($url);
       if (is_array($a)) {
         $lineas = file($url);
-
         //validar sintaxis
         $val_sintaxis= new Sintaxis($lineas);
         $val_sintaxis->validate();
@@ -35,8 +34,7 @@ include ('conexion.php');
           //echo "New record created successfully";
           } else {
           echo "Error: " . $sql . "<br>" . $conn->error;
-          }
-       
+          } 
        $conn->close();
      } else {
         include('sin_conexion.php');

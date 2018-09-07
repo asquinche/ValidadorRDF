@@ -14,7 +14,7 @@ include ('conexion.php');
     //verificar duplicidad de datos       
     $val_duplicidad = new Duplicidad($lineas);
     $val_duplicidad->validate();
-    $strinError=$strinError.implode(, $val_duplicidad->getErrors());
+    $strinError=$strinError.implode($val_duplicidad->getErrors());
 
     //verificar etiquetas
     $txt=implode("", $lineas);
